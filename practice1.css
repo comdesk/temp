@@ -1,0 +1,22 @@
+@charset "uft-8";
+header li {
+    list-style-type: none;
+    display: inline-block;
+}
+header > ul:first-of-type {
+    margin-right: 10%;
+    
+    float: right;
+}
+header > ul:last-of-type {
+    margin-right: 10%;
+    
+    clear: both;
+    float: right;
+}
+img#logo {
+    margin-left: 10%;
+}
+img#main {
+    width: 100vw;
+}
