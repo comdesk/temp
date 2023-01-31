@@ -1,0 +1,113 @@
+@charset "utf-8";
+#login {
+    width: 400px;
+    height: 70px;
+    border-radius: 3px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    font-weight: bold;
+    color: white;
+    background-color: rgb(25, 206, 96);
+}
+#container > p {
+    color: rgb(128, 128, 128);
+}
+#login > img {
+    width: 100px;
+}
+.icon {
+    width: 20px;
+
+    display: inline-block;
+
+    vertical-align: bottom;
+}
+#password::before {
+    content: '';
+
+    width: 4px;
+    height: 4px;
+    margin:5px 9px 5px 5px;
+
+    display: inline-block;
+   
+    background: rgb(215, 220, 224);
+    border-radius: 100%;
+
+}
+#join {
+    float: right;
+}
+#account {
+    float: left;
+}
+#wrapper {
+    clear: both;
+}
+.container {
+    width: 400px;
+    margin-top: 15px;
+}
+.wrapper {
+    padding: 20px;
+    border: 1px solid rgb(218, 225, 230);
+
+    display: inline-block;
+    background-color: rgb(247, 249, 250);
+    line-height: 17px;
+    font-size: 13px;
+   
+    overflow: hidden;
+}
+#wrapper {
+    width: 400px;
+}
+#wrapper > strong:first-of-type {
+    font-size: 15px
+}
+.kospi::before {
+    content: '';
+
+    width: 1px;
+    height: 11px;
+    margin-left: 2px;
+    margin-right: 8px;
+
+    display: inline-block;
+
+    background-color: rgb(228, 232, 235);
+}
+.kospi_num::before {
+    content: '▼';
+
+    width: 17px;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+
+    color: rgb(2, 132, 244);
+}
+.kospi_num {
+    color: rgb(2, 132, 244);
+}
+.button {
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+
+    font-family: "D2Coding";
+    font-weight: bold;
+    font-size: 15px;
+    
+    background-color: rgb(250, 251, 252);
+    border: 1px solid rgb(218, 225, 230);
+
+    float: right;
+
+    cursor: pointer;
+}
