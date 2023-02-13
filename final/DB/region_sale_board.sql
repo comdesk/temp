@@ -1,9 +1,3 @@
-DROP TABLE member;
-
-CREATE TABLE member (
-    user_id NUMBER CONSTRAINT member_user_id_pk PRIMARY KEY
-);
-
 DROP table region_board;
 
 CREATE TABLE region_board (
