@@ -9,8 +9,8 @@ DROP table region_board;
 CREATE TABLE region_board (
     post_no NUMBER
         CONSTRAINT region_board_post_no_pk PRIMARY KEY,
-    members_id NUMBER
-        CONSTRAINT region_board_members_id_fk REFERENCES members(members_id) ON DELETE SET NULL,
+    member_id NUMBER
+        CONSTRAINT region_board_member_id_fk REFERENCES members(member_id) ON DELETE SET NULL,
     title VARCHAR2(300) NOT NULL,
     content VARCHAR2(4000) NOT NULL,
     views NUMBER DEFAULT 0 NOT NULL,
@@ -26,8 +26,8 @@ DROP TABLE sale_board;
 CREATE TABLE sale_board (
     post_no NUMBER
         CONSTRAINT sale_board_post_no_pk PRIMARY KEY,
-    members_id NUMBER
-        CONSTRAINT sale_board_members_id_fk REFERENCES members(members_id) ON DELETE SET NULL,
+    member_id NUMBER
+        CONSTRAINT sale_board_member_id_fk REFERENCES members(member_id) ON DELETE SET NULL,
     title VARCHAR2(300) NOT NULL,
     content VARCHAR2(4000) NOT NULL,
     views NUMBER DEFAULT 0 NOT NULL,
@@ -44,8 +44,8 @@ CREATE TABLE region_board_comment (
     comment_no NUMBER,
     post_no NUMBER
         CONSTRAINT region_board_comment_post_no_fk REFERENCES region_board(post_no) ON DELETE CASCADE,
-    members_id NUMBER
-        CONSTRAINT region_board_comment_members_id_fk REFERENCES members(members_id) ON DELETE SET NULL,
+    member_id NUMBER
+        CONSTRAINT region_board_comment_member_id_fk REFERENCES members(member_id) ON DELETE SET NULL,
     secret_yn CHAR(1)
         CONSTRAINT region_board_comment_secret_yn_ck NOT NULL,
     content VARCHAR2(4000) NOT NULL,
@@ -63,8 +63,8 @@ CREATE TABLE sale_board_comment (
     comment_no NUMBER,
     post_no NUMBER
         CONSTRAINT sale_board_comment_post_no_fk REFERENCES sale_board(post_no) ON DELETE CASCADE,
-    members_id NUMBER
-        CONSTRAINT sale_board_comment_members_id_fk REFERENCES members(members_id) ON DELETE SET NULL,
+    member_id NUMBER
+        CONSTRAINT sale_board_comment_member_id_fk REFERENCES members(member_id) ON DELETE SET NULL,
     content VARCHAR2(4000) NOT NULL,
     like_cnt NUMBER DEFAULT 0 NOT NULL,
     high_comment_no NUMBER,
@@ -106,10 +106,10 @@ DROP TABLE members_keyword;
 
 CREATE TABLE members_keyword (
     keyword VARCHAR2(30) NOT NULL,
-    members_id NUMBER
-        CONSTRAINT members_keyword_members_id_fk REFERENCES members(members_id) ON DELETE CASCADE,
+    member_id NUMBER
+        CONSTRAINT members_keyword_member_id_fk REFERENCES members(member_id) ON DELETE CASCADE,
        
-    CONSTRAINT members_keyword_keyword_members_id_pk PRIMARY KEY(keyword, members_id)
+    CONSTRAINT members_keyword_keyword_member_id_pk PRIMARY KEY(keyword, member_id)
 );
 
 DROP TABLE region_board_keyword_not;
@@ -122,10 +122,10 @@ CREATE TABLE region_board_keyword_not (
     post_no NUMBER
         CONSTRAINT region_board_keyword_not_post_no_fk REFERENCES region_board(post_no) ON DELETE SET NULL,
     keyword VARCHAR2(30) NOT NULL,
-    members_id NUMBER NOT NULL,
+    member_id NUMBER NOT NULL,
     
-    CONSTRAINT region_board_keyword_not_keyword_members_id_fk 
-    FOREIGN KEY(keyword, members_id) REFERENCES members_keyword(keyword, members_id) ON DELETE CASCADE   --º¸·ù
+    CONSTRAINT region_board_keyword_not_keyword_member_id_fk 
+    FOREIGN KEY(keyword, member_id) REFERENCES members_keyword(keyword, member_id)
 ); 
 
 DROP TABLE sale_board_keyword_not;
@@ -138,21 +138,21 @@ CREATE TABLE sale_board_keyword_not (
     post_no NUMBER
         CONSTRAINT sale_board_keyword_not_post_no_fk REFERENCES sale_board(post_no) ON DELETE SET NULL,
     keyword VARCHAR2(30) NOT NULL,
-    members_id NUMBER NOT NULL,
+    member_id NUMBER NOT NULL,
     
-    CONSTRAINT sale_board_keyword_not_keyword_members_id_fk 
-    FOREIGN KEY(keyword, members_id) REFERENCES members_keyword(keyword, members_id) ON DELETE CASCADE   --º¸·ù
+    CONSTRAINT sale_board_keyword_not_keyword_member_id_fk 
+    FOREIGN KEY(keyword, member_id) REFERENCES members_keyword(keyword, member_id)
 );
 
 DROP TABLE region_board_act_not;
 
 CREATE TABLE region_board_act_not (
     not_no NUMBER CONSTRAINT region_board_act_not_not_no_pk PRIMARY KEY,
-    members_id NUMBER
-        CONSTRAINT region_board_act_not_members_id_fk REFERENCES members(members_id) ON DELETE CASCADE NOT NULL,
+    member_id NUMBER
+        CONSTRAINT region_board_act_not_member_id_fk REFERENCES members(member_id) NOT NULL,
     post_no NUMBER
         CONSTRAINT region_board_act_not_post_no_fk REFERENCES region_board(post_no) ON DELETE SET NULL,
-    not_target_members_id NUMBER NOT NULL,
+    not_target_member_id NUMBER NOT NULL,
     not_content VARCHAR2(150) NOT NULL,
     not_type VARCHAR2(15)
         CONSTRAINT region_board_act_not_not_type_ck 
@@ -165,11 +165,11 @@ DROP TABLE sale_board_act_not;
 
 CREATE TABLE sale_board_act_not (
     not_no NUMBER CONSTRAINT sale_board_act_not_not_no_pk PRIMARY KEY,
-    members_id NUMBER
-        CONSTRAINT sale_board_act_not_members_id_fk REFERENCES members(members_id) ON DELETE CASCADE NOT NULL,
+    member_id NUMBER
+        CONSTRAINT sale_board_act_not_member_id_fk REFERENCES members(member_id) NOT NULL,
     post_no NUMBER
         CONSTRAINT sale_board_act_not_post_no_fk REFERENCES sale_board(post_no) ON DELETE SET NULL,
-    not_target_members_id NUMBER NOT NULL,
+    not_target_member_id NUMBER NOT NULL,
     not_content VARCHAR2(150) NOT NULL,
     not_type VARCHAR2(15)
         CONSTRAINT sale_board_act_not_not_type_ck 
@@ -183,8 +183,8 @@ DROP TABLE region_board_bookmark;
 CREATE TABLE region_board_bookmark (
     bookmark_no NUMBER
         CONSTRAINT region_board_bookmark_bookmark_no_pk PRIMARY KEY,
-    members_id NUMBER
-        CONSTRAINT region_board_bookmark_members_id_fk REFERENCES members(members_id) ON DELETE CASCADE NOT NULL,
+    member_id NUMBER
+        CONSTRAINT region_board_bookmark_member_id_fk REFERENCES members(member_id) ON DELETE CASCADE NOT NULL,
     post_no NUMBER
         CONSTRAINT region_board_bookmark_post_no_fk REFERENCES region_board(post_no) ON DELETE SET NULL
 );
@@ -194,8 +194,8 @@ DROP TABLE sale_board_bookmark;
 CREATE TABLE sale_board_bookmark (
     bookmark_no NUMBER
         CONSTRAINT sale_board_bookmark_bookmark_no_pk PRIMARY KEY,
-    members_id NUMBER
-        CONSTRAINT sale_board_bookmark_members_id_fk REFERENCES members(members_id) ON DELETE CASCADE NOT NULL ,
+    member_id NUMBER
+        CONSTRAINT sale_board_bookmark_member_id_fk REFERENCES members(member_id) ON DELETE CASCADE NOT NULL ,
     post_no NUMBER
         CONSTRAINT sale_board_bookmark_post_no_fk REFERENCES sale_board(post_no) ON DELETE SET NULL
 );
