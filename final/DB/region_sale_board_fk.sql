@@ -1,15 +1,8 @@
-DROP TABLE member;
-
-CREATE TABLE member (
-    user_id NUMBER CONSTRAINT member_user_id_pk PRIMARY KEY
-);
-
 DROP table region_board;
 
 CREATE TABLE region_board (
-    post_no NUMBER
-        CONSTRAINT region_board_post_no_pk PRIMARY KEY,
-    user_id NUMBER,        
+    post_no NUMBER,
+    member_id NUMBER NOT NULL,        
     title VARCHAR2(300) NOT NULL,
     content VARCHAR2(4000) NOT NULL,
     views NUMBER DEFAULT 0 NOT NULL,
@@ -23,9 +16,8 @@ CREATE TABLE region_board (
 DROP TABLE sale_board;
 
 CREATE TABLE sale_board (
-    post_no NUMBER
-        CONSTRAINT sale_board_post_no_pk PRIMARY KEY,
-    user_id NUMBER,
+    post_no NUMBER,
+    member_id NUMBER NOT NULL,
     title VARCHAR2(300) NOT NULL,
     content VARCHAR2(4000) NOT NULL,
     views NUMBER DEFAULT 0 NOT NULL,
@@ -40,9 +32,8 @@ DROP TABLE region_board_comment;
 
 CREATE TABLE region_board_comment (
     comment_no NUMBER,
-    post_no NUMBER
-        CONSTRAINT region_board_comment_post_no_fk REFERENCES region_board(post_no) ON DELETE CASCADE,
-    user_id NUMBER,
+    post_no NUMBER,
+    member_id NUMBER NOT NULL,
     secret_yn CHAR(1) NOT NULL,
     content VARCHAR2(4000) NOT NULL,
     like_cnt NUMBER DEFAULT 0 NOT NULL,
@@ -57,9 +48,8 @@ DROP TABLE sale_board_comment;
     
 CREATE TABLE sale_board_comment (
     comment_no NUMBER,
-    post_no NUMBER
-        CONSTRAINT sale_board_comment_post_no_fk REFERENCES sale_board(post_no) ON DELETE CASCADE,
-    user_id NUMBER,
+    post_no NUMBER,
+    member_id NUMBER NOT NULL,
     content VARCHAR2(4000) NOT NULL,
     like_cnt NUMBER DEFAULT 0 NOT NULL,
     high_comment_no NUMBER,
@@ -73,8 +63,7 @@ DROP TABLE region_board_file;
 
 CREATE TABLE region_board_file (
     file_id VARCHAR2(200),
-    post_no NUMBER
-        CONSTRAINT region_board_file_post_no_fk REFERENCES region_board(post_no) ON DELETE CASCADE,
+    post_no NUMBER NOT NULL,
     file_name VARCHAR2(200) NOT NULL,
     file_path VARCHAR2(1000) NOT NULL,
     file_size NUMBER NOT NULL,
@@ -87,65 +76,51 @@ DROP TABLE sale_board_file;
 
 CREATE TABLE sale_board_file (
     file_id VARCHAR2(200),
-    post_no NUMBER
-        CONSTRAINT sale_board_file_post_no_fk REFERENCES sale_board(post_no) ON DELETE SET NULL,
+    post_no NUMBER NOT NULL,
     file_name VARCHAR2(200) NOT NULL,
     file_path VARCHAR2(1000) NOT NULL,
     file_size NUMBER NOT NULL,
-    create_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    
-    CONSTRAINT sale_board_file_file_id_post_no_pk PRIMARY KEY(file_id, post_no)
+    create_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-DROP TABLE user_keyword;
+DROP TABLE member_keyword;
 
-CREATE TABLE user_keyword (
-    keyword VARCHAR2(30) NOT NULL,
-    user_id NUMBER CONSTRAINT user_keyword_user_id_fk REFERENCES member(user_id) ON DELETE CASCADE,
-       
-    CONSTRAINT user_keyword_keyword_user_id_pk PRIMARY KEY(keyword, user_id)
+CREATE TABLE member_keyword (
+    keyword VARCHAR2(30),
+    member_id NUMBER
 );
 
 DROP TABLE region_board_keyword_not;
 
 CREATE TABLE region_board_keyword_not (
-    not_no NUMBER CONSTRAINT region_board_keyword_not_not_no_pk PRIMARY KEY NOT NULL,
+    not_no NUMBER,
     not_content VARCHAR2(150) NOT NULL,
     not_dt TIMESTAMP NOT NULL,
     not_read_dt TIMESTAMP,
-    post_no NUMBER
-        CONSTRAINT region_board_keyword_not_post_no_fk REFERENCES region_board(post_no) ON DELETE SET NULL,
+    post_no NUMBER,
     keyword VARCHAR2(30) NOT NULL,
-    user_id NUMBER NOT NULL,
-    
-    CONSTRAINT region_board_keyword_not_keyword_user_id_fk 
-    FOREIGN KEY(keyword, user_id) REFERENCES user_keyword(keyword, user_id) ON DELETE CASCADE   --보류
+    member_id NUMBER NOT NULL
 ); 
 
 DROP TABLE sale_board_keyword_not;
 
 CREATE TABLE sale_board_keyword_not (
-    not_no NUMBER CONSTRAINT sale_board_keyword_not_not_no_pk PRIMARY KEY NOT NULL,
+    not_no NUMBER,
     not_content VARCHAR2(150) NOT NULL,
     not_dt TIMESTAMP NOT NULL,
     not_read_dt TIMESTAMP,
-    post_no NUMBER
-        CONSTRAINT sale_board_keyword_not_post_no_fk REFERENCES sale_board(post_no) ON DELETE SET NULL,
-    keyword VARCHAR2(30) NOT NULL,
-    user_id NUMBER NOT NULL,
-    
-    CONSTRAINT sale_board_keyword_not_keyword_user_id_fk 
-    FOREIGN KEY(keyword, user_id) REFERENCES user_keyword(keyword, user_id) ON DELETE CASCADE   --보류
+    post_no NUMBER,
+    keyword VARCHAR2(30),
+    member_id NUMBER
 );
 
 DROP TABLE region_board_act_not;
 
 CREATE TABLE region_board_act_not (
-    not_no NUMBER CONSTRAINT region_board_act_not_not_no_pk PRIMARY KEY,
-    user_id NUMBER,
-    post_no NUMBER
-        CONSTRAINT region_board_act_not_post_no_fk REFERENCES region_board(post_no) ON DELETE SET NULL,
-    not_target_user_id NUMBER NOT NULL,
+    not_no NUMBER,
+    member_id NUMBER NOT NULL,
+    post_no NUMBER,
+    not_target_member_id NUMBER NOT NULL,
     not_content VARCHAR2(150) NOT NULL,
     not_type VARCHAR2(15)
         CONSTRAINT region_board_act_not_not_type_ck 
@@ -157,11 +132,10 @@ CREATE TABLE region_board_act_not (
 DROP TABLE sale_board_act_not;
 
 CREATE TABLE sale_board_act_not (
-    not_no NUMBER CONSTRAINT sale_board_act_not_not_no_pk PRIMARY KEY,
-    user_id NUMBER,
-    post_no NUMBER
-        CONSTRAINT sale_board_act_not_post_no_fk REFERENCES sale_board(post_no) ON DELETE SET NULL,
-    not_target_user_id NUMBER NOT NULL,
+    not_no NUMBER,
+    member_id NUMBER NOT NULL,
+    post_no NUMBER,
+    not_target_member_id NUMBER NOT NULL,
     not_content VARCHAR2(150) NOT NULL,
     not_type VARCHAR2(15)
         CONSTRAINT sale_board_act_not_not_type_ck 
@@ -173,39 +147,18 @@ CREATE TABLE sale_board_act_not (
 DROP TABLE region_board_bookmark;
 
 CREATE TABLE region_board_bookmark (
-    bookmark_no NUMBER
-        CONSTRAINT region_board_bookmark_bookmark_no_pk PRIMARY KEY,
-    user_id NUMBER,
+    bookmark_no NUMBER,
+    member_id NUMBER NOT NULL,
     post_no NUMBER
-        CONSTRAINT region_board_bookmark_post_no_fk REFERENCES region_board(post_no) ON DELETE SET NULL
 );
 
 DROP TABLE sale_board_bookmark;
 
 CREATE TABLE sale_board_bookmark (
-    bookmark_no NUMBER
-        CONSTRAINT sale_board_bookmark_bookmark_no_pk PRIMARY KEY,
-    user_id NUMBER,
+    bookmark_no NUMBER,
+    member_id NUMBER NOT NULL,
     post_no NUMBER
-        CONSTRAINT sale_board_bookmark_post_no_fk REFERENCES sale_board(post_no) ON DELETE SET NULL
 );
-
-ALTER TABLE region_board ADD 
-CONSTRAINT region_board_user_id_fk FOREIGN KEY(user_id) REFERENCES member(user_id) ON DELETE SET NULL;
-ALTER TABLE sale_board ADD
-CONSTRAINT sale_board_user_id_fk FOREIGN KEY(user_id) REFERENCES member(user_id) ON DELETE SET NULL;
-ALTER TABLE region_board_comment ADD
-CONSTRAINT region_board_comment_user_id_fk REFERENCES member(user_id) ON DELETE SET NULL;
-ALTER TABLE sale_board_comment ADD
-CONSTRAINT sale_board_comment_user_id_fk REFERENCES member(user_id) ON DELETE SET NULL;
-ALTER TABLE region_board_act_not ADD
-CONSTRAINT region_board_act_not_user_id_fk REFERENCES member(user_id) ON DELETE CASCADE NOT NULL;
-ALTER TABLE sale_board_act_not ADD
-CONSTRAINT sale_board_act_not_user_id_fk REFERENCES member(user_id) ON DELETE CASCADE NOT NULL;
-ALTER TABLE region_board_bookmark ADD
-CONSTRAINT region_board_bookmark_user_id_fk REFERENCES member(user_id) ON DELETE CASCADE NOT NULL;
-ALTER TABLE sale_board_bookmark ADD
-CONSTRAINT sale_board_bookmark_user_id_fk REFERENCES member(user_id) ON DELETE CASCADE NOT NULL;
 
 
 DESC region_board;
@@ -214,7 +167,7 @@ DESC region_board_comment;
 DESC sale_board_comment; 
 DESC region_board_file;
 DESC sale_board_file;
-DESC user_keyword;  
+DESC member_keyword;  
 DESC region_board_keyword_not;   
 DESC sale_board_keyword_not; 
 DESC region_board_act_not;
@@ -229,7 +182,7 @@ DROP TABLE region_board_comment CASCADE CONSTRAINTS;
 DROP TABLE sale_board_comment CASCADE CONSTRAINTS;
 DROP TABLE region_board_file CASCADE CONSTRAINTS;
 DROP TABLE sale_board_file CASCADE CONSTRAINTS;
-DROP TABLE user_keyword CASCADE CONSTRAINTS;
+DROP TABLE member_keyword CASCADE CONSTRAINTS;
 DROP TABLE region_board_keyword_not CASCADE CONSTRAINTS;
 DROP TABLE sale_board_keyword_not CASCADE CONSTRAINTS;
 DROP TABLE region_board_act_not CASCADE CONSTRAINTS;
