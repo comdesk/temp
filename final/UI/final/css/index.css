@@ -79,7 +79,11 @@ body {
     width: 100%;
     border-top: 1px solid lightgray;
 }
+#footer > P:first-of-type {
+    margin-left: 42px;
+}
 #footer > p:last-of-type {
+    margin-right: 42px;
     float: right;
 }
 #footer ul > .nav_item + .nav_item::before {
