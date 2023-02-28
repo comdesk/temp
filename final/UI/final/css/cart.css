@@ -2,8 +2,6 @@
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 #wrap {
-    margin: 0 auto;
-
     font-family: 'Jeju Gothic', sans-serif;
 }
 body {
@@ -12,14 +10,46 @@ body {
 #header {
     border-bottom: 1px solid lightgray;
     padding: 0px 100px;
-    background-color: rgb(83, 189, 56);
+    background-color: #7cb342;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 #logo {
     width: 100px;
-    height: 100px;
+    height: 100px;   
 }
 .nav_item {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
     margin-right: 10px;
     cursor: pointer;
+    list-style: none;
+}
+.gnb {   
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.5em;
+}
+.gnb_li {
+    margin-right: 50px;
+}
+.nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.nav_text {
+    height: fit-content;
+}
+#search {
+    width: 1130px;
+    margin: 0 auto;
+}
+#container {
+    width: 1130px;
+    margin: 0 auto;
 }
