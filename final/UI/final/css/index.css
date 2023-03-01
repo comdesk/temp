@@ -35,7 +35,7 @@ body {
 }
 #info li:first-of-type::after {
     content: "";
-    background-image: url("../imgs/location2.png");
+    background-image: url("../imgs/whiteloc.png");
     display: inline-block;
     width: 15px;
     height: 15px;
