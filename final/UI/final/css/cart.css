@@ -11,7 +11,7 @@ body {
     min-width: 1500px;
 }
 .header_color {
-    background-color: green; 
+    background-color: #53917E; 
     height: 100px; 
 }
 #header {
@@ -123,7 +123,7 @@ body {
 .search_form {
     width: 400px;
     height: 40px;
-    border: 1px solid green;
+    border: 1px solid #53917E;
     border-radius: 10px;
 
     display: flex;
@@ -136,8 +136,10 @@ body {
     width: 30px;
     height: 30px;
     border: 0;
+    background-color: white;
+    color: #53917E;
 
-    background: url("../imgs/search_green.png") 0px 9px no-repeat;
+    align-self: center;
     cursor: pointer;
 }
 .search_input {
@@ -154,10 +156,9 @@ body {
     margin-left: 20px;
     
     background-color: white;
-    color: green;
+    color: #53917E;
     cursor: pointer;
 }
 .mypick_bt:first-of-type {
     margin-left: 0;
 }
-
