@@ -1,0 +1,321 @@
+@charset "utf-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+#wrap {
+    font-family: 'Jeju Gothic', sans-serif;
+}
+body {
+    margin: 0;
+}
+.widthfix {
+    min-width: 1500px;
+}
+.header_color {
+    background-color: #53917E; 
+    height: 100px; 
+}
+#header {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+    padding: 0px 100px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#header > span {
+    color: white;
+    font-size: 22px;   
+}
+.nav_item {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    cursor: pointer;
+    list-style: none;
+
+    color: white;
+}
+#gnb {
+    margin-left: 100px;
+}
+.gnb {   
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.5em;
+}
+.gnb_li {
+    margin-right: 50px;
+}
+.gnb_li:last-of-type {
+    margin-right: 0;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.nav_text {
+    height: fit-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#search {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+    background-color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search_fix {
+    position: sticky;
+    top: 0px;
+}
+#container {
+    width: 1130px;
+    margin: 0 auto;
+}
+#login_bt {
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    border: 0;
+    margin-left: 10px;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-family: 'Jeju Gothic', sans-serif;
+
+    cursor: pointer;
+}
+#info li:last-of-type {
+    margin-right: 0;
+}
+.fa-bars {
+    display: inline-block;
+    font-size: 16px;
+}
+#info li:first-of-type::after {
+    content: "";
+    background-image: url("../imgs/pin-8-16.png");
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -10%;
+}
+.cate {
+    display: flex;    
+    width: 120px;
+    justify-content: space-between;
+}
+.cate > span {
+    font-size: 20px;
+    align-self: center;
+}
+.search_form {
+    width: 400px;
+    height: 40px;
+    border: 1px solid #53917E;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-around;
+}
+.search_bar {
+    width: 400px;
+}
+.submit_bt {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-color: white;
+    color: #53917E;
+
+    align-self: center;
+    cursor: pointer;
+}
+.search_input {
+    width: 300px;
+    border: 0;
+
+    font-family: 'Jeju Gothic', sans-serif;
+}
+.mypick_bt {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    margin-left: 20px;
+    
+    background-color: white;
+    color: #53917E;
+    cursor: pointer;
+}
+.mypick_bt:first-of-type {
+    margin-left: 0;
+}
+#section {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.cate_ul {
+    padding: 0;
+}
+.cate_nav_item {
+    width: 220px;
+    height: 40px;
+
+    /* display: flex;
+    text-align: center;
+    vertical-align: middle;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center; */
+
+    margin-bottom: 17px;
+    list-style: none;
+}
+/* .cate_nav_item::after {
+    content: "\f078";
+    display: inline-block;
+    font: var(--fa-font-solid);
+    font-weight: 900;
+    color: grey;
+
+    font-size: 0.75em;
+    line-height: -8px;
+    margin-left: 10px;
+} */
+a {
+    text-decoration: none;
+    color: black;
+}
+.cate_nav_bt {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    background-color: white;
+    color: rgb(189, 185, 185);
+
+    align-self: center;
+    cursor: pointer;
+}
+.nonedeco_li {
+    list-style: none;
+}
+.cate_nav_item input {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+
+    position: absolute;
+}
+.cate_title {
+    width: 220px;
+
+    display: flex;
+    justify-content: space-between;
+}
+.cate_title > label {
+    padding-top: 5px;
+}
+.goods_img_tbl {
+    padding-top: 16px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 250px;
+
+}
+.goods_img {
+    display: inline-block;
+    justify-self: end;
+}
+.page_index {
+    width: 100%;
+    margin-left: 17px;
+    margin-top: 40px;
+
+    display: flex;
+    justify-content: center;
+}
+.page_index_item {
+    width: 30px;
+    height: 30px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page_index_item:first-of-type {
+    border-left: 1px solid lightgray;
+}
+.page_index_item:hover {
+    background-color: rgb(233, 233, 233);
+}
+
+
+
+
+
+
+
+#top_bt {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid lightgray;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    right: 24px;
+    bottom: 20px;
+    z-index: 100;
+}
+#top_bt:hover {
+    background-color: #53917E;
+}
+#footer {
+    width: 1130px;
+    margin: 0 auto;
+}
+.footer_text {
+    color: black;
+}
+.footer_text + .footer_text::before {
+    content: '';
+    width: 1px;
+    height: 16px;
+    margin-right: 15px;
+
+    background-color: lightgray;
+    vertical-align: -2px;
+
+    display: inline-block;
+}
+.footer_nav {
+    justify-content: start;
+}
