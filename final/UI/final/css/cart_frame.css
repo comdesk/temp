@@ -80,6 +80,12 @@ body {
     align-items: center;
 
     position: sticky;
+    z-index: 1;
+}
+.search_fix {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
 }
 #container {
     width: 1130px;
@@ -163,4 +169,27 @@ body {
 }
 .mypick_bt:first-of-type {
     margin-left: 0;
+}
+#top_bt {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid lightgray;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    right: 24px;
+    bottom: 20px;
+    z-index: 100;
+}
+#top_bt:hover {
+    background-color: #53917E;
+}
+a {
+    text-decoration: none;
+    color: black;
 }
